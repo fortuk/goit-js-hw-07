@@ -6,8 +6,8 @@ galleryContainerEL.insertAdjacentHTML('beforeend', galleryItemListEl);
 
 galleryContainerEL.addEventListener('click', onGalleryContainerClick);
 
-function createColorCardsMarkup(items) {
-    return items
+function createColorCardsMarkup(galleryItems) {
+    return galleryItems
         .map(({ preview, original, description }) => {
             return `
       <a class="gallery__item" href="${original}">
@@ -25,14 +25,14 @@ const lightbox = new SimpleLightbox('.gallery a', {
 });
 
 function onGalleryContainerClick(evt) {
-    evt.preventDefault();
-    const isColorSwatchEl = evt.target.classList.contains('gallery__image');
-    if (!isColorSwatchEl) {
+
+    const isImageSwatchEl = ev.target.classList.contains('gallery__image');
+    if (!isImageSwatchEl) {
         return;
     }
 
-    window.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
+    window.addEventListener("keydown", (evt) => {
+        if (evt.key === "Escape") {
             instance.close();
         };
     })

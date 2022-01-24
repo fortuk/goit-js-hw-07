@@ -6,8 +6,8 @@ galleryContainetEl.insertAdjacentHTML("beforeend", galleryItemListEl);
 
 galleryContainetEl.addEventListener('click', onGalleryContainerClick);
 
-function makeGalleryItemList(items) {
-    return items
+function makeGalleryItemList(galleryItems) {
+    return galleryItems
         .map(({ preview, original, description }) => {
             return `
             <div class="gallery__item">
@@ -24,18 +24,21 @@ function makeGalleryItemList(items) {
         .join("");
 }
 
-function onGalleryContainerClick(ev) {
-    ev.preventDefautl();
-    const isImageSwatchEl = ev.target.classList.contains('gallery__image');
+function onGalleryContainerClick(event) {
+
+    const isImageSwatchEl = event.target.classList.contains('gallery__image');
     if (!isImageSwatchEl) {
         return;
     }
 
-    const item = ev.target.dataset.source
+    const item = event.target.dataset.source
     const instance = basicLighbox.create(`<div class="modal">
-           <img src="${item}" width="800" height="600"> 
+           <img src="${item}"> 
     </div>`)
-    instance.show();
+
+
+    instance.show()
+
     window.addEventListener("keydown", (event) => {
         if (event.key === "Escape") {
             instance.close();
