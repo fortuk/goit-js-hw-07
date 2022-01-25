@@ -25,7 +25,7 @@ function makeGalleryItemList(galleryItems) {
 }
 
 function onGalleryContainerClick(event) {
-
+    evt.preventDefault();
     const isImageSwatchEl = event.target.classList.contains('gallery__image');
     if (!isImageSwatchEl) {
         return;

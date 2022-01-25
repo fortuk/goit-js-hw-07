@@ -1,10 +1,11 @@
 import { galleryItems } from './gallery-items.js';
 // Change code below this line
-const galleryContainerEL = document.querySelector('.gallery');
-const galleryItemListEl = createColorCardsMarkup(galleryItems);
-galleryContainerEL.insertAdjacentHTML('beforeend', galleryItemListEl);
 
-galleryContainerEL.addEventListener('click', onGalleryContainerClick);
+const galleryContainer = document.querySelector('.gallery');
+const cardsMarkup = createColorCardsMarkup(galleryItems);
+galleryContainer.insertAdjacentHTML('beforeend', cardsMarkup);
+
+galleryContainer.addEventListener('click', onGalleryContainerClick);
 
 function createColorCardsMarkup(galleryItems) {
     return galleryItems
@@ -17,7 +18,7 @@ function createColorCardsMarkup(galleryItems) {
         }).join('');
 }
 
-const lightbox = new SimpleLightbox('.gallery a', {
+var lightbox = new SimpleLightbox('.gallery a', {
     captions: true,
     captionsData: "alt",
     captionPosition: 'bottom',
@@ -25,14 +26,14 @@ const lightbox = new SimpleLightbox('.gallery a', {
 });
 
 function onGalleryContainerClick(evt) {
-
-    const isImageSwatchEl = ev.target.classList.contains('gallery__image');
-    if (!isImageSwatchEl) {
+    evt.preventDefault();
+    const isColorSwatchEl = evt.target.classList.contains('gallery__image');
+    if (!isColorSwatchEl) {
         return;
     }
 
-    window.addEventListener("keydown", (evt) => {
-        if (evt.key === "Escape") {
+    window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
             instance.close();
         };
     })
